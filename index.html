@@ -25,7 +25,7 @@
       width: 300%;
       height: 300%;
       background: url('https://www.script-tutorials.com/demos/360/images/stars.png') repeat;
-      animation: starScroll 25s linear infinite;
+      animation: starScroll 25s linear forwards;
       z-index: -1;
       opacity: 0.8; 
     }
@@ -92,7 +92,7 @@
     .projectile {
       position: absolute;
       font-size: 16px;
-      animation: shootUp 0.5s linear forwards, spin 0.5s linear infinite;
+      animation: shootUp 0.5s linear forwards, spin 0.5s linear forwards;
     }
     @keyframes shootUp {
       from { bottom: 60px; }
@@ -130,7 +130,7 @@
     .powerup {
       position: absolute;
       font-size: 20px;
-      animation: powerFall 8s linear infinite, wiggle 2s ease-in-out infinite;
+      animation: powerFall 8s linear forwards, wiggle 2s ease-in-out forwards;
     }
     @keyframes powerFall {
       from { top: -50px; }
