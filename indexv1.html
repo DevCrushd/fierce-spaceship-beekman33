@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>V2 FIERCE SPACESHIP: Final Shooty Chaos</title>
+  <title>FIERCE SPACESHIP: Final Shooty Chaos</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     /***********************************************************/
@@ -422,48 +422,38 @@
       currentWeapon = key;
       weaponDisplay.textContent = weapons[key].name;
     }
-  /***********************************************************/
-    /*                     Update Health Score                        */
-    /***********************************************************/
-
-    function changeHealth(amount) {
-  health += amount;
-  if (health > 100) health = 100; // Maximum health cap
-  if (health < 0) health = 0; // Minimum health cap
-  healthDisplay.textContent = health;
-  console.log('Health updated:', health);
-}
   
     /***********************************************************/
     /*                   Spawn Enemy Function                  */
     /***********************************************************/
     function spawnEnemy() {
-  if (gamePaused) return;
-  enemyAppearSound.currentTime = 0;
-  enemyAppearSound.play();
-
-  const enemy = document.createElement('div');
-  enemy.className = 'enemy';
-
-  // 30% chance diagonal
-  if (Math.random() < 0.3) {
-    enemy.classList.add('diagonal');
-  }
-
-  const randomEmoji = enemyEmojis[Math.floor(Math.random() * enemyEmojis.length)];
-  enemy.textContent = randomEmoji;
-  enemy.style.left = Math.floor(Math.random() * (window.innerWidth - 50)) + 'px';
-  document.body.appendChild(enemy);
-
-  // if the enemy reaches bottom => health -5
-  enemy.addEventListener('animationend', () => {
-    enemy.remove();
-    if (!shieldActive) {
-      changeHealth(-5); // Decrease health by 5
-      if (health <= 0) endGame();
+      if (gamePaused) return;
+      enemyAppearSound.currentTime = 0;
+      enemyAppearSound.play();
+  
+      const enemy = document.createElement('div');
+      enemy.className = 'enemy';
+  
+      // 30% chance diagonal
+      if (Math.random() < 0.3) {
+        enemy.classList.add('diagonal');
+      }
+  
+      const randomEmoji = enemyEmojis[Math.floor(Math.random() * enemyEmojis.length)];
+      enemy.textContent = randomEmoji;
+      enemy.style.left = Math.floor(Math.random() * (window.innerWidth - 50)) + 'px';
+      document.body.appendChild(enemy);
+  
+      // if the enemy reaches bottom => health -5
+      enemy.addEventListener('animationend', () => {
+        enemy.remove();
+        if (!shieldActive) {
+          health -= 5;
+          if (health <= 0) endGame();
+          healthDisplay.textContent = health;
+        }
+      });
     }
-  });
-}
   
     /***********************************************************/
     /*                Spawn Power-Ups Function                 */
@@ -566,8 +556,7 @@
         adjustDifficulty();
       }
     }
-
-    
+  
     /***********************************************************/
     /*                  Apply Power-Up Effects                 */
     /***********************************************************/
