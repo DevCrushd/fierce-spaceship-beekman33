@@ -11,7 +11,7 @@
     /***********************************************************/
     body {
       margin: 0;
-      overflow: hidden;
+      /*overflow: hidden;*/
       background-color: #000; /* black background */
       font-family: 'Press Start 2P', cursive;
       color: #0f0; /* bright green text for scoreboard and such */
@@ -638,6 +638,22 @@
       // Power-ups every 10 seconds
       setInterval(spawnPowerUp, 10000);
     }
+    
+    // Paste the scroll event listener and handler here
+    window.addEventListener('scroll', handleScroll);
+  
+    function handleScroll() {
+      // Calculate the new position based on scroll position
+      const scrollPosition = window.scrollY || window.pageYOffset;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const maxLeft = window.innerWidth - spaceship.offsetWidth;
+      const left = (scrollPosition / maxScroll) * maxLeft;
+  
+      if (left >= 0 && left <= maxLeft) {
+        spaceship.style.left = `${left}px`;
+      }
+    }
+  
     initGame();
   </script>
 </body>
