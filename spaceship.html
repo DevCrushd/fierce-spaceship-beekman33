@@ -346,7 +346,7 @@
     /***********************************************************/
     /*                     Event Listeners                     */
     /***********************************************************/
-    document.addEventListener('keydown', (e) => {
+    /*document.addEventListener('keydown', (e) => {
       if (gameOver) return;
       if (e.key.toLowerCase() === 'p') {
         togglePause();
@@ -363,7 +363,40 @@
           break;
       }
     });
+    /***********************************************************/
+    /*              Added scroll event listener                         */
+    /***********************************************************/
+window.addEventListener('scroll', handleScroll);
 
+function handleScroll() {
+  // Calculate the new position based on scroll position
+  const scrollPosition = window.scrollY || window.pageYOffset;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  const maxLeft = window.innerWidth - spaceship.offsetWidth;
+  const left = (scrollPosition / maxScroll) * maxLeft;
+
+  if (left >= 0 && left <= maxLeft) {
+    spaceship.style.left = `${left}px`;
+  }
+}
+
+function handleKeydown(e) {
+  if (gameOver) return;
+  if (e.key.toLowerCase() === 'p') {
+    togglePause();
+    return;
+  }
+  if (gamePaused) return;
+
+  switch(e.key) {
+    case 'ArrowLeft':  moveShip(-20); break;
+    case 'ArrowRight': moveShip(20);  break;
+    case ' ':          fireWeapon();  break;
+    default:
+      if (weapons[e.key]) switchWeapon(e.key);
+      break;
+  }
+}
     /***********************************************************/
     /*                       Move Ship                         */
     /***********************************************************/
