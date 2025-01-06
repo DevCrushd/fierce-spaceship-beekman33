@@ -458,10 +458,8 @@
   // if the enemy reaches bottom => health -5
   enemy.addEventListener('animationend', () => {
     enemy.remove();
-    if (!shieldActive) {
-      changeHealth(-5); // Decrease health by 5
-      if (health <= 0) endGame();
-    }
+    changeHealth(-5); // Decrease health by 5
+    if (health <= 0) endGame();
   });
 }
   
