@@ -69,7 +69,7 @@
     .enemy {
       position: absolute;
       font-size: 23px; 
-      animation: enemyFall 5s linear infinite;
+      animation: enemyFall 5s linear forwards;
     }
     @keyframes enemyFall {
       from { top: -50px; }
@@ -78,7 +78,7 @@
 
     /* Some enemies with diagonal or wobbly movement */
     .enemy.diagonal {
-      animation: enemyDiagonal 6s linear infinite;
+      animation: enemyDiagonal 6s linear forwards;
     }
     @keyframes enemyDiagonal {
       0%   { top: -50px; left: -50px; }
@@ -458,6 +458,7 @@
   // if the enemy reaches bottom => health -5
   enemy.addEventListener('animationend', () => {
     enemy.remove();
+    console.log('Enemy reached the bottom, decreasing health by 5');
     changeHealth(-5); // Decrease health by 5
     if (health <= 0) endGame();
   });
