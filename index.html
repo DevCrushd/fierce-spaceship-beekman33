@@ -238,12 +238,13 @@
     Score: <span id="score">0</span> | Health: <span id="health">100</span>% | Weapon: <span id="weapon">Laser!</span>
   </div>
 
-  <!-- Game Over Screen -->
-  <div id="gameOverScreen">
+<!-- Game Over Screen -->
+<div id="gameOverScreen">
     <h1>Game Over! You Fought Bravely.</h1>
     <p>Your Final Score: <span id="finalScore">0</span></p>
-    <button onclick="restartGame()">Play Again?</button>
+    <button>Play Again?</button>
   </div>
+  
 
   <!-- Pause Overlay -->
   <div id="pauseOverlay">
@@ -566,11 +567,11 @@ function spawnEnemy() {
     enemy.style.left = Math.floor(Math.random() * (window.innerWidth - 5)) + 'vw'; // Changed from 50px to 5vw
     document.body.appendChild(enemy);
 
-    // if the enemy reaches bottom => health -1    
+    // if the enemy reaches bottom => health -5    
     enemy.addEventListener('animationend', () => {
       enemy.remove();
       if (!shieldActive) {
-        health -= 1    ;
+        health -= 5    ;
         if (health <= 0) endGame();
         healthDisplay.textContent = health;
       }
@@ -764,7 +765,10 @@ function createExplosion(x, y) {
       location.reload();
     }
   
-   /***********************************************************/
+ 
+
+   
+    /***********************************************************/
 /*                      Init Game                          */
 /***********************************************************/
 function initGame() {
@@ -776,60 +780,13 @@ function initGame() {
   // Add event listeners for mouse and touch events
   window.addEventListener('mousemove', handleMouseMove);
   window.addEventListener('touchmove', handleTouchMove);
-  window.addEventListener('click', fireLaser);
-  window.addEventListener('touchstart', fireLaser);
-  document.getElementById('play-again-button').addEventListener('click', resetGame);
-  document.getElementById('play-again-button').addEventListener('touchstart', resetGame);
+  window.addEventListener('click', fireWeapon);
+  window.addEventListener('touchstart', fireWeapon);
 }
 
-function handleMouseMove(event) {
-  const mouseX = event.clientX;
-  moveSpaceship(mouseX);
-}
-
-function handleTouchMove(event) {
-  const touchX = event.touches[0].clientX;
-  moveSpaceship(touchX);
-}
-
-function moveSpaceship(x) {
-  const spaceshipWidth = spaceship.offsetWidth;
-  const maxLeft = window.innerWidth - spaceshipWidth;
-  let left = x - (spaceshipWidth / 2);
-
-  if (left < 0) {
-    left = 0;
-  } else if (left > maxLeft) {
-    left = maxLeft;
-  }
-
-  spaceship.style.left = `${left}px`;
-}
-
-function fireLaser() {
-  // Your laser firing logic here
-}
-
-function resetGame() {
-  // Your game reset logic here
-}
-
-initGame();
-
-   
-    /***********************************************************/
-/*                      Init Game                          */
-/***********************************************************/
-/*function initGame() {
-  // Start spawning enemies
-  enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
-  // Power-ups every 10 seconds
-  setInterval(spawnPowerUp, 10000);
-
-  // Add event listeners for mouse and touch events
-  window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('touchmove', handleTouchMove);
-}
+// Add event listener for the "Play Again" button
+document.querySelector('#gameOverScreen button').addEventListener('click', restartGame);
+document.querySelector('#gameOverScreen button').addEventListener('touchstart', restartGame);
 
 function handleMouseMove(event) {
   const mouseX = event.clientX;
@@ -856,7 +813,7 @@ function moveSpaceship(x) {
 }
 
 // Initialize the game
-initGame();*/
+initGame();
 
   </script>
 </body>
