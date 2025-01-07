@@ -1,11 +1,9 @@
-
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FIERCE SPACESHIP: Landon's Shooty Chaos</title>
+  <title>V2 FIERCE SPACESHIP: Final Shooty Chaos</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     /***********************************************************/
@@ -19,192 +17,201 @@
       color: #0f0; /* bright green text for scoreboard and such */
     }
 
-   /***********************************************************/
-/*            Starfield with Random Color Overlay  - CodeMate       */
-/***********************************************************/
-#starfield {
-  position: fixed;
-  width: 300%;
-  height: 300%;
-  background: url('https://www.script-tutorials.com/demos/360/images/stars.png') repeat;
-  animation: starScroll 25s linear forwards;
-  z-index: -1;
-  opacity: 0.8; 
-}
+    /***********************************************************/
+    /*            Starfield with Random Color Overlay          */
+    /***********************************************************/
+    #starfield {
+      position: fixed;
+      width: 300%;
+      height: 300%;
+      background: url('https://www.script-tutorials.com/demos/360/images/stars.png') repeat;
+      animation: starScroll 25s linear forwards;
+      z-index: -1;
+      opacity: 0.8; 
+    }
+    @keyframes starScroll {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(-800px, -1000px); }
+    }
 
-@keyframes starScroll {
-  from { transform: translate(0, 0); }
-  to   { transform: translate(-50vw, -50vh); } /* Adjusted to use viewport units */
-}
-
-/* Random tinted color overlay behind starfield */
-#colorOverlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: -2;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-
-   /***********************************************************/
-/*                   Player's Fierce Spaceship  - CodeMate          */
-/***********************************************************/
-/* 66% smaller than the old big icons => around 26px if original was 40px */
-#spaceship {
-  position: absolute;
-  bottom: 2%; /* Adjusted from 20px to 2% */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.6vh; /* Adjusted from 26px to 2.6vh for relative sizing */
-  transition: left 0.05s ease-in-out;
-  animation: spaceshipHover 3s ease-in-out forwards alternate;
-}
-
-@keyframes spaceshipHover {
-  0%   { transform: translate(-50%, 0); }
-  100% { transform: translate(-50%, -5%); }
-}
-
-
-   /***********************************************************/
-/*                       Enemie - CodeMate                           */
-/***********************************************************/
-/* ~66% smaller from 35px => ~23px */
-.enemy {
-  position: absolute;
-  font-size: 2.3vh; /* Adjusted from 23px to 2.3vh for relative sizing */
-  animation: enemyFall 5s linear forwards;
-}
-
-@keyframes enemyFall {
-  from { top: -5vh; } /* Adjusted from -50px to -5vh */
-  to   { top: 100vh; }
-}
-
-/* Some enemies with diagonal or wobbly movement */
-.enemy.diagonal {
-  animation: enemyDiagonal 6s linear forwards;
-}
-
-@keyframes enemyDiagonal {
-  0%   { top: -5vh; left: -5vw; } /* Adjusted from -50px to -5vh and -5vw */
-  100% { top: 100vh; left: 100vw; }
-}
-
-   /***********************************************************/
-/*                 Projectiles (Weapons) - CodeMate                */
-/***********************************************************/
-/* ~66% smaller from 25px => 16px + spin animation */
-.projectile {
-  position: absolute;
-  font-size: 1.6vh; /* Adjusted from 16px to 1.6vh for relative sizing */
-  animation: shootUp 0.5s linear forwards, spin 0.5s linear forwards;
-}
-
-@keyframes shootUp {
-  from { bottom: 6vh; } /* Adjusted from 60px to 6vh */
-  to   { bottom: 110%; }
-}
-
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+    /* Random tinted color overlay behind starfield */
+    #colorOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
 
     /***********************************************************/
-/*                     Explosions - CodeMate                    */
-/***********************************************************/
-/* ~66% smaller from 35px => 23px + ephemeral text */
-.explosion {
-  position: absolute;
-  font-size: 2.3vh; /* Adjusted from 23px to 2.3vh for relative sizing */
-  animation: explode 0.8s ease-out forwards;
-  text-align: center;
-  white-space: nowrap;
-  pointer-events: none;
-  color: #ff0; /* bright yellow for retro effect */
-  text-shadow: 0.1vh 0.1vh 0.2vh #000; /* Adjusted from 1px 1px 2px to vh units */
-}
+    /*                   Player's Fierce Spaceship             */
+    /***********************************************************/
+    /* 66% smaller than the old big icons => around 26px if original was 40px */
+    #spaceship {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 26px;
+      transition: left 0.05s ease-in-out;
+      animation: spaceshipHover 3s ease-in-out infinite alternate;
+    }
+    @keyframes spaceshipHover {
+      0%   { transform: translate(-50%, 0); }
+      100% { transform: translate(-50%, -5%); }
+    }
 
-@keyframes explode {
-  0%   { opacity: 1; transform: scale(1);   }
-  50%  { opacity: 1; transform: scale(1.4); }
-  100% { opacity: 0; transform: scale(2);   }
-}
+    /***********************************************************/
+    /*                       Enemies                           */
+    /***********************************************************/
+    /* ~66% smaller from 35px => ~23px */
+    .enemy {
+      position: absolute;
+      font-size: 23px; 
+      animation: enemyFall 5s linear forwards;
+    }
+    @keyframes enemyFall {
+      from { top: -50px; }
+      to   { top: 100vh; }
+    }
 
+    /* Some enemies with diagonal or wobbly movement */
+    .enemy.diagonal {
+      animation: enemyDiagonal 6s linear forwards;
+    }
+    @keyframes enemyDiagonal {
+      0%   { top: -50px; left: -50px; }
+      100% { top: 100vh; left: 100vw; }
+    }
 
-   /***********************************************************/
-/*                     Power-Ups - CodeMate                          */
-/***********************************************************/
-/* ~66% smaller => 20px + wiggle animation */
-.powerup {
-  position: absolute;
-  font-size: 2vh; /* Adjusted from 20px to 2vh for relative sizing */
-  animation: powerFall 8s linear forwards, wiggle 2s ease-in-out forwards;
-}
+    /***********************************************************/
+    /*                 Projectiles (Weapons)                   */
+    /***********************************************************/
+    /* ~66% smaller from 25px => 16px + spin animation */
+    .projectile {
+      position: absolute;
+      font-size: 16px;
+      animation: shootUp 0.5s linear forwards, spin 0.5s linear forwards;
+    }
+    @keyframes shootUp {
+      from { bottom: 60px; }
+      to   { bottom: 110%; }
+    }
+    @keyframes spin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-@keyframes powerFall {
-  from { top: -5vh; } /* Adjusted from -50px to -5vh */
-  to   { top: 100vh; }
-}
+    /***********************************************************/
+    /*                     Explosions                          */
+    /***********************************************************/
+    /* ~66% smaller from 35px => 23px + ephemeral text */
+    .explosion {
+      position: absolute;
+      font-size: 23px;
+      animation: explode 0.8s ease-out forwards;
+      text-align: center;
+      white-space: nowrap;
+      pointer-events: none;
+      color: #ff0; /* bright yellow for retro effect */
+      text-shadow: 1px 1px 2px #000;
+    }
+    @keyframes explode {
+      0%   { opacity: 1; transform: scale(1);   }
+      50%  { opacity: 1; transform: scale(1.4); }
+      100% { opacity: 0; transform: scale(2);   }
+    }
 
-@keyframes wiggle {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(1.2vw); } /* Adjusted from 12px to 1.2vw */
-  100% { transform: translateX(0); }
-}
+    /***********************************************************/
+    /*                     Power-Ups                           */
+    /***********************************************************/
+    /* ~66% smaller => 20px + wiggle animation */
+    .powerup {
+      position: absolute;
+      font-size: 20px;
+      animation: powerFall 8s linear forwards, wiggle 2s ease-in-out forwards;
+    }
+    @keyframes powerFall {
+      from { top: -50px; }
+      to   { top: 100vh; }
+    }
+    @keyframes wiggle {
+      0%   { transform: translateX(0); }
+      50%  { transform: translateX(12px); }
+      100% { transform: translateX(0); }
+    }
 
-/***********************************************************/
-/*                     Scoreboard - CodeMate                         */
-/***********************************************************/
-#scoreboard {
-  position: absolute;
-  top: 1vh; /* Adjusted from 10px to 1vh */
-  left: 50%;
-  transform: translateX(-50%);
-  color: #0f0;
-  text-shadow: 0.2vh 0.2vh 0.4vh #000; /* Adjusted from 2px 2px 4px to vh units */
-  z-index: 1;
-  font-size: 1.2vh; /* Adjusted from 12px to 1.2vh for relative sizing */
-  text-align: center;
-}
+    /***********************************************************/
+    /*                     Scoreboard                          */
+    /***********************************************************/
+    #scoreboard {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #0f0;
+      text-shadow: 2px 2px 4px #000;
+      z-index: 1;
+      font-size: 12px; /* small retro text */
+      text-align: center;
+    }
 
-
-  /***********************************************************/
-/*                Pause & Game Over Overlays               */
-/***********************************************************/
-#gameOverScreen, #pauseOverlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+    /***********************************************************/
+    /*                Pause & Game Over Overlays               */
+    /***********************************************************/
+    #gameOverScreen {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 2;
   color: #ff00ff;
   background: rgba(0, 0, 0, 0.8);
-  font-size: 1.6vh; /* Adjusted from 16px to 1.6vh for relative sizing */
+  font-size: 16px;
   text-align: center;
-  animation: overlayFlash 2s forwards alternate;
+  animation: overlayFlash 2s infinite alternate;
+}
+
+#pauseOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  color: #ff00ff;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  text-align: center;
+  animation: overlayFlash 2s infinite alternate;
 }
 
 @keyframes overlayFlash {
-  0%   { opacity: 1; }
+  0% { opacity: 1; }
   100% { opacity: 0.8; }
 }
 
+#gameOverScreen p,
 #gameOverScreen button {
-  margin-top: 2vh; /* Adjusted from 20px to 2vh */
-  padding: 1vh 2vh; /* Adjusted from 10px 20px to 1vh 2vh */
-  font-size: 1.6vh; /* Adjusted from 16px to 1.6vh */
+  display: block;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-  background-color: #0f0;
+  color: #0f0e0f;
+  background-color: #ff00ff;
   border: none;
-  border-radius: 0.5vh; /* Adjusted from 5px to 0.5vh */
+  border-radius: 5px;
+  font-weight: bold;
 }
-
   </style>
 </head>
 <body>
@@ -219,15 +226,16 @@
   <!-- Scoreboard -->
   <div id="scoreboard">
     <div>** FIERCE SPACESHIP SHOOTER **</div>
+    <br> <!-- Adds a line break for space -->
     Score: <span id="score">0</span> | Health: <span id="health">100</span>% | Weapon: <span id="weapon">Laser!</span>
   </div>
 
   <!-- Game Over Screen -->
-  <div id="gameOverScreen">
-    <h1>Game Over! You Fought Bravely.</h1>
-    <p>Your Final Score: <span id="finalScore">0</span></p>
-    <button onclick="restartGame()">Play Again?</button>
-  </div>
+<div id="gameOverScreen">
+  <h1>Game Over! You Fought Bravely.</h1>
+  <p>Your Final Score: <span id="finalScore">0</span></p>
+  <button onclick="restartGame()">Play Again?</button>
+</div>
 
   <!-- Pause Overlay -->
   <div id="pauseOverlay">
@@ -361,76 +369,56 @@
     const thresholdScore = 500;
     let enemyIntervalId = null;
   
- /***********************************************************/
-/*                     Event Listeners                     */
-/***********************************************************/
-document.addEventListener('keydown', (e) => {
-  if (gameOver) return;
-  if (e.key.toLowerCase() === 'p') {
-    togglePause();
-    return;
+    /***********************************************************/
+    /*                     Event Listeners                     */
+    /***********************************************************/
+    document.addEventListener('keydown', (e) => {
+      if (bgMusic.paused) {
+    bgMusic.play();
   }
-  if (gamePaused) return;
+      if (gameOver) return;
+      if (e.key.toLowerCase() === 'p') {
+        togglePause();
+        return;
+      }
+      if (gamePaused) return;
+  
+      switch(e.key) {
+        case 'ArrowLeft':  moveShip(-20); break;
+        case 'ArrowRight': moveShip(20);  break;
+        case ' ':          fireWeapon();  break;
+        default:
+          if (weapons[e.key]) switchWeapon(e.key);
+          break;
+      }
+    });
+  
+    // Add mousemove event listener
+  let targetX = window.innerWidth / 2;
+  window.addEventListener('mousemove', (event) => {
+    targetX = event.clientX;
+  });
 
-  switch(e.key) {
-    case 'ArrowLeft':  moveShip(-20); break;
-    case 'ArrowRight': moveShip(20);  break;
-    case ' ':          fireWeapon();  break;
-    default:
-      if (weapons[e.key]) switchWeapon(e.key);
-      break;
+  let currentX = targetX;
+  function animate() {
+    currentX += (targetX - currentX) * 0.1; // Smoothing factor 0.1
+    spaceship.style.left = `${currentX - spaceship.offsetWidth / 2}px`;
+    requestAnimationFrame(animate);
   }
-});
+  animate();
 
-/***********************************************************/
-/*                     Touch Events - CodeMate              */
-/***********************************************************/
-let touchStartX = 0;
-let touchEndX = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-
-window.addEventListener('touchstart', (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-  touchStartY = e.changedTouches[0].screenY;
-});
-
-window.addEventListener('touchend', (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  touchEndY = e.changedTouches[0].screenY;
-  handleGesture();
-});
-
-function handleGesture() {
-  const deltaX = touchEndX - touchStartX;
-  const deltaY = touchEndY - touchStartY;
-
-  // Determine if the gesture is a swipe or a tap
-  if (Math.abs(deltaX) > Math.abs(deltaY)) {
-    // Horizontal swipe
-    if (deltaX > 50) {
-      moveShip(20); // Swipe right
-    } else if (deltaX < -50) {
-      moveShip(-20); // Swipe left
+  
+    /***********************************************************/
+    /*                       Move Ship                         */
+    /***********************************************************/
+    function moveShip(offset) {
+      const left = spaceship.offsetLeft + offset;
+      const maxLeft = window.innerWidth - spaceship.offsetWidth;
+      if (left >= 0 && left <= maxLeft) {
+        spaceship.style.left = `${left}px`;
+      }
     }
-  } else {
-    // Vertical swipe or tap
-    if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
-      fireWeapon(); // Tap
-    }
-  }
-}
-
-/***********************************************************/
-/*                       Move Ship                         */
-/***********************************************************/
-function moveShip(offset) {
-  const left = spaceship.offsetLeft + offset;
-  const maxLeft = window.innerWidth - spaceship.offsetWidth;
-  if (left >= 0 && left <= maxLeft) {
-    spaceship.style.left = `${left}px`;
-  }
-}
+  
     /***********************************************************/
     /*                     Fire Weapon                         */
     /***********************************************************/
@@ -463,47 +451,47 @@ function moveShip(offset) {
       currentWeapon = key;
       weaponDisplay.textContent = weapons[key].name;
     }
+  /***********************************************************/
+    /*                     Update Health Score                        */
+    /***********************************************************/
+
+    function changeHealth(amount) {
+  health += amount;
+  if (health > 100) health = 100; // Maximum health cap
+  if (health < 0) health = 0; // Minimum health cap
+  healthDisplay.textContent = health;
+  console.log('Health updated:', health);
+}
   
-/***********************************************************/
-/*                   Spawn Enemy Function                  */
-/***********************************************************/
-function spawnEnemy() {
+    /***********************************************************/
+    /*                   Spawn Enemy Function                  */
+    /***********************************************************/
+    function spawnEnemy() {
   if (gamePaused) return;
   enemyAppearSound.currentTime = 0;
   enemyAppearSound.play();
 
-  const numberOfEnemies = Math.floor(Math.random() * 3) + 1; // Spawn between 1 to 3 enemies at once
+  const enemy = document.createElement('div');
+  enemy.className = 'enemy';
 
-  for (let i = 0; i < numberOfEnemies; i++) {
-    const enemy = document.createElement('div');
-    enemy.className = 'enemy';
-
-    // 30% chance diagonal
-    if (Math.random() < 0.3) {
-      enemy.classList.add('diagonal');
-    }
-
-    const randomEmoji = enemyEmojis[Math.floor(Math.random() * enemyEmojis.length)];
-    enemy.textContent = randomEmoji;
-    enemy.style.left = Math.floor(Math.random() * (window.innerWidth - 5)) + 'vw'; // Changed from 50px to 5vw
-    document.body.appendChild(enemy);
-
-    // if the enemy reaches bottom => health -1    
-    enemy.addEventListener('animationend', () => {
-      enemy.remove();
-      if (!shieldActive) {
-        health -= 1    ;
-        if (health <= 0) endGame();
-        healthDisplay.textContent = health;
-      }
-    });
+  // 30% chance diagonal
+  if (Math.random() < 0.3) {
+    enemy.classList.add('diagonal');
   }
+
+  const randomEmoji = enemyEmojis[Math.floor(Math.random() * enemyEmojis.length)];
+  enemy.textContent = randomEmoji;
+  enemy.style.left = Math.floor(Math.random() * (window.innerWidth - 50)) + 'px';
+  document.body.appendChild(enemy);
+
+  // if the enemy reaches bottom => health -5
+  enemy.addEventListener('animationend', () => {
+    enemy.remove();
+    console.log('Enemy reached the bottom, decreasing health by 5');
+    changeHealth(-5); // Decrease health by 5
+    if (health <= 0) endGame();
+  });
 }
-
-// Call spawnEnemy function at regular intervals
-setInterval(spawnEnemy, 1000); // Adjust the interval as needed to control the difficulty
-
-
   
     /***********************************************************/
     /*                Spawn Power-Ups Function                 */
@@ -567,38 +555,31 @@ setInterval(spawnEnemy, 1000); // Adjust the interval as needed to control the d
       );
     }
   
-   /***********************************************************/
-/*          Explosion with Fun Random Quotes              */
-/***********************************************************/
-function createExplosion(x, y) {
-  const explosion = document.createElement('div');
-  explosion.className = 'explosion';
-
-  // random 3 explosion emojis
-  let expEmojis = '';
-  for (let i = 0; i < 3; i++) {
-    expEmojis += explosionEmojis[Math.floor(Math.random() * explosionEmojis.length)];
-  }
-
-  // random funny quote
-  const quote = explosionQuotes[Math.floor(Math.random() * explosionQuotes.length)];
-
-  explosion.innerHTML = expEmojis + "<br><small>" + quote + "</small>";
+    /***********************************************************/
+    /*          Explosion with Fun Random Quotes              */
+    /***********************************************************/
+    function createExplosion(x, y) {
+      const explosion = document.createElement('div');
+      explosion.className = 'explosion';
   
-  // Convert x and y to viewport units
-  const xInVw = (x / window.innerWidth) * 100;
-  const yInVh = (y / window.innerHeight) * 100;
+      // random 3 explosion emojis
+      let expEmojis = '';
+      for (let i = 0; i < 3; i++) {
+        expEmojis += explosionEmojis[Math.floor(Math.random() * explosionEmojis.length)];
+      }
   
-  explosion.style.left = xInVw + 'vw';
-  explosion.style.top  = yInVh + 'vh';
+      // random funny quote
+      const quote = explosionQuotes[Math.floor(Math.random() * explosionQuotes.length)];
   
-  document.body.appendChild(explosion);
-
-  explosion.addEventListener('animationend', () => {
-    explosion.remove();
-  });
-}
+      explosion.innerHTML = expEmojis + "<br><small>" + quote + "</small>";
+      explosion.style.left = x + 'px';
+      explosion.style.top  = y + 'px';
+      document.body.appendChild(explosion);
   
+      explosion.addEventListener('animationend', () => {
+        explosion.remove();
+      });
+    }
   
     /***********************************************************/
     /*                     Update Score                        */
@@ -613,7 +594,8 @@ function createExplosion(x, y) {
         adjustDifficulty();
       }
     }
-  
+
+    
     /***********************************************************/
     /*                  Apply Power-Up Effects                 */
     /***********************************************************/
@@ -686,34 +668,24 @@ function createExplosion(x, y) {
       location.reload();
     }
   
-   /***********************************************************/
-/*                      Init Game                          */
-/***********************************************************/
-function initGame() {
-  // Start spawning enemies
-  enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
-  // Power-ups every 10 seconds
-  setInterval(spawnPowerUp, 10000);
-
-  // Add event listeners for mouse and touch events
-  window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('touchmove', handleTouchMove);
-}
+    /***********************************************************/
+    /*                      Init Game                          */
+    /***********************************************************/
+    function initGame() {
+      // Start spawning enemies
+      enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
+      // Power-ups every 10 seconds
+      setInterval(spawnPowerUp, 10000);
+    }
+    
+    // Add these lines
+window.addEventListener('mousemove', handleMouseMove);
 
 function handleMouseMove(event) {
   const mouseX = event.clientX;
-  moveSpaceship(mouseX);
-}
-
-function handleTouchMove(event) {
-  const touchX = event.touches[0].clientX;
-  moveSpaceship(touchX);
-}
-
-function moveSpaceship(x) {
   const spaceshipWidth = spaceship.offsetWidth;
   const maxLeft = window.innerWidth - spaceshipWidth;
-  let left = x - (spaceshipWidth / 2);
+  let left = mouseX - (spaceshipWidth / 2);
 
   if (left < 0) {
     left = 0;
@@ -723,10 +695,8 @@ function moveSpaceship(x) {
 
   spaceship.style.left = `${left}px`;
 }
-
-// Initialize the game
-initGame();
-
+  
+    initGame();
   </script>
 </body>
 </html>
