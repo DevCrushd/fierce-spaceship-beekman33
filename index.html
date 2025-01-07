@@ -363,7 +363,7 @@
     ];
   
     /***********************************************************/
-    /*                     Power-Ups                           */
+    /*                     Power-Ups test                           */
     /***********************************************************/
     const powerupEmojis = ["🛡️","🔋","⭐"];
     let shieldActive  = false;
@@ -398,6 +398,24 @@ document.addEventListener('keydown', (e) => {
       break;
   }
 });
+
+document.addEventListener('touchstart', function() {
+  if (!bgMusic.playing) {
+    bgMusic.play().catch(error => {
+      console.error('Error playing background music:', error);
+    });
+  }
+}, { once: true });
+
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'Space' && !bgMusic.playing) {
+    bgMusic.play().catch(error => {
+      console.error('Error playing background music:', error);
+    });
+  }
+}, { once: true });
+
+
 /***********************************************************/
 /*                     Touch Events                        */
 /***********************************************************/
@@ -451,54 +469,6 @@ document.addEventListener('touchend', (e) => {
   }
   e.preventDefault(); // Prevent default behavior
 }, { passive: false });
-
-/***********************************************************/
-/*                     Touch Events - CodeMate              */
-/***********************************************************/
-/*let touchStartX = 0;
-let touchEndX = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-
-window.addEventListener('touchstart', (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-  touchStartY = e.changedTouches[0].screenY;
-});
-
-window.addEventListener('touchend', (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  touchEndY = e.changedTouches[0].screenY;
-  handleGesture();
-});
-
-function handleGesture() {
-  const deltaX = touchEndX - touchStartX;
-  const deltaY = touchEndY - touchStartY;
-
-  // Determine if the gesture is a swipe or a tap
-  if (Math.abs(deltaX) > Math.abs(deltaY)) {
-    // Horizontal swipe
-    if (deltaX > 50) {
-      moveShip(20); // Swipe right
-    } else if (deltaX < -50) {
-      moveShip(-20); // Swipe left
-    }
-  } else {
-    // Vertical swipe or tap
-    if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
-      fireWeapon(); // Tap
-    }
-  }
-}
-// Prevent double-tap zoom
-let lastTouchEnd = 0;
-document.addEventListener('touchend', (e) => {
-  const now = new Date().getTime();
-  if (now - lastTouchEnd <= 300) {
-    e.preventDefault();
-  }
-  lastTouchEnd = now;
-}, false);*/
 
 /***********************************************************/
 /*                       Move Ship                         */
@@ -772,6 +742,25 @@ function createExplosion(x, y) {
 /*                      Init Game                          */
 /***********************************************************/
 function initGame() {
+
+    // Add mobile interaction listener
+    document.addEventListener('touchstart', function() {
+    if (!bgMusic.playing) {
+      bgMusic.play().catch(error => {
+        console.error('Error playing background music:', error);
+      });
+    }
+  }, { once: true });
+
+  // Add desktop interaction listener
+  document.addEventListener('keydown', function(event) {
+    if (event.code === 'Space' && !bgMusic.playing) {
+      bgMusic.play().catch(error => {
+        console.error('Error playing background music:', error);
+      });
+    }
+  }, { once: true });
+
   // Start spawning enemies
   enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
   // Power-ups every 10 seconds
