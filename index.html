@@ -160,6 +160,7 @@
     /***********************************************************/
     /*                Pause & Game Over Overlays               */
     /***********************************************************/
+
     #gameOverScreen, #pauseOverlay {
       position: fixed;
       top: 0; left: 0;
@@ -186,7 +187,37 @@
       background-color: #0f0;
       border: none;
       border-radius: 5px;
+      align-items: center;
+
     }
+    /*#gameOverScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      color: #ff00ff;
+      background: rgba(0, 0, 0, 0.8);
+      font-size: 16px;
+      text-align: center;
+      animation: overlayFlash 2s infinite alternate;
+    }
+    @keyframes overlayFlash {
+      0%   { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+    #gameOverScreen button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #0f0;
+      border: none;
+      border-radius: 5px;
+    }*/
   </style>
 </head>
 <body>
@@ -208,7 +239,9 @@
   <!-- Game Over Screen -->
   <div id="gameOverScreen">
     <h1>Game Over! You Fought Bravely.</h1>
+    <br>
     <p>Your Final Score: <span id="finalScore">0</span></p>
+    <br>
     <button onclick="restartGame()">Play Again?</button>
   </div>
 
@@ -348,6 +381,9 @@
     /*                     Event Listeners                     */
     /***********************************************************/
     document.addEventListener('keydown', (e) => {
+      if (bgMusic.paused) {
+    bgMusic.play();
+  }
       if (gameOver) return;
       if (e.key.toLowerCase() === 'p') {
         togglePause();
