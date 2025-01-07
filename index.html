@@ -776,6 +776,59 @@ function initGame() {
   // Add event listeners for mouse and touch events
   window.addEventListener('mousemove', handleMouseMove);
   window.addEventListener('touchmove', handleTouchMove);
+  window.addEventListener('click', fireLaser);
+  window.addEventListener('touchstart', fireLaser);
+  document.getElementById('play-again-button').addEventListener('click', resetGame);
+  document.getElementById('play-again-button').addEventListener('touchstart', resetGame);
+}
+
+function handleMouseMove(event) {
+  const mouseX = event.clientX;
+  moveSpaceship(mouseX);
+}
+
+function handleTouchMove(event) {
+  const touchX = event.touches[0].clientX;
+  moveSpaceship(touchX);
+}
+
+function moveSpaceship(x) {
+  const spaceshipWidth = spaceship.offsetWidth;
+  const maxLeft = window.innerWidth - spaceshipWidth;
+  let left = x - (spaceshipWidth / 2);
+
+  if (left < 0) {
+    left = 0;
+  } else if (left > maxLeft) {
+    left = maxLeft;
+  }
+
+  spaceship.style.left = `${left}px`;
+}
+
+function fireLaser() {
+  // Your laser firing logic here
+}
+
+function resetGame() {
+  // Your game reset logic here
+}
+
+initGame();
+
+   
+    /***********************************************************/
+/*                      Init Game                          */
+/***********************************************************/
+/*function initGame() {
+  // Start spawning enemies
+  enemyIntervalId = setInterval(spawnEnemy, enemySpawnInterval);
+  // Power-ups every 10 seconds
+  setInterval(spawnPowerUp, 10000);
+
+  // Add event listeners for mouse and touch events
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('touchmove', handleTouchMove);
 }
 
 function handleMouseMove(event) {
@@ -803,7 +856,7 @@ function moveSpaceship(x) {
 }
 
 // Initialize the game
-initGame();
+initGame();*/
 
   </script>
 </body>
